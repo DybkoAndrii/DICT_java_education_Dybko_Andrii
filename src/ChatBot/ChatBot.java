@@ -21,5 +21,18 @@ public class ChatBot {
         for(int i = 0; i < br + 1; i++) {
             System.out.println(i + " !");
         }
+        System.out.println("let's test your belonging to azov");
+        System.out.println("Gde vy byli 8 let?");
+        System.out.println("1. Igral v genshin.");
+        System.out.println("2. Uchils`a");
+        System.out.println("3. Dombil Bombas");
+        System.out.println("4. Doma");
+        int ans = userInput.nextInt();
+        while (ans != 3) {
+            System.out.println("Please, try again.");
+            ans = userInput.nextInt();
+        }
+        System.out.println("Great, you right!");
+        System.out.println("Goodbye, have a nice day!");
     }
 }
