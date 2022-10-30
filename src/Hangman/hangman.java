@@ -1,5 +1,6 @@
 package Hangman;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class hangman {
@@ -13,23 +14,43 @@ public class hangman {
             userChArray[i] = '-';
         }
         Scanner userInput = new Scanner(System.in);
-        for (int j = 0; j < 8; j++) {
+        byte healthPoint = 8;
+        while (healthPoint > 0){
             for (int i = 0; i < chArray.length; i++) {
                 System.out.print(userChArray[i]);
+            }
+            if (Arrays.equals(chArray, userChArray)){
+                System.out.println("\nYou guessed the word!");
+                break;
             }
             System.out.println(' ');
             System.out.print("Input a letter: ");
             char userChar = userInput.nextLine().toCharArray()[0];
-            int b = 0;
+            if (checkChar(userChar, userChArray) == 1){
+                System.out.println("No improvements");
+                healthPoint--;
+            } else if (checkChar(userChar, chArray) == 0) {
+                System.out.println("That letter doesn't appear in the word");
+                healthPoint--;
+            }
             for (int i = 0; i < chArray.length; i++){
                 if (chArray[i] == userChar){
                     userChArray[i] = userChar;
-                    b++;
                 }
-            } if (b == 0){
-                System.out.println("That letter doesn't appear in the word");
             }
         }
-        System.out.println("Thanks for playing!\nWe'll see how well you did in the next stage");
+        if (healthPoint == 0)
+            System.out.println("Deti Donbasa zakidali vas palkami");
+        else
+            System.out.println("You survived!");
+    }
+
+    public static byte checkChar(char usInp, char[] chArr){
+        byte j = 0;
+        for (char i : chArr){
+            if (i == usInp)
+                j++;
+        }
+        return j;
     }
 }
