@@ -6,26 +6,39 @@ import java.util.Scanner;
 
 public class hangman {
     public static void main(String[] args){
+        Scanner userInput = new Scanner(System.in);
+        while (true) {
+            System.out.println("Type 'play' to play the game, 'exit' to quit: ");
+            String action = userInput.nextLine();
+            if (action.equals("play"))
+                game();
+            else if (action.equals("exit")) {
+                break;
+            }else
+                System.out.println("ERROR");
+        }
+    }
+
+    public static void game(){
         System.out.println("HANGMAN");
         String[] words = new String[]{"python", "java", "javascript", "kotlin"};
-
-        int n = (int)(Math.random() * words.length);
+        Scanner userInput = new Scanner(System.in);
+        int n = (int) (Math.random() * words.length);
         char[] chArray = words[n].toCharArray();
         char[] userChArray = new char[chArray.length];
 
         HashSet<Character> userTry = new HashSet<>();
-        for (int i = 0; i < chArray.length; i++){
+        for (int i = 0; i < chArray.length; i++) {
             userChArray[i] = '-';
         }
-        Scanner userInput = new Scanner(System.in);
         byte healthPoint = 8;
 
-        while (healthPoint > 0){
+        while (healthPoint > 0) {
             for (int i = 0; i < chArray.length; i++) {
                 System.out.print(userChArray[i]);
             }
             System.out.println(' ');
-            if (Arrays.equals(chArray, userChArray)){
+            if (Arrays.equals(chArray, userChArray)) {
                 System.out.println("You survived!");
                 break;
             }
@@ -46,14 +59,13 @@ public class hangman {
             } else
                 System.out.println("You should input a single letter");
 
-            for (int i = 0; i < chArray.length; i++){
-                if (chArray[i] == userChar){
+            for (int i = 0; i < chArray.length; i++) {
+                if (chArray[i] == userChar)
                     userChArray[i] = userChar;
-                }
             }
+            if (healthPoint == 0)
+                System.out.println("Deti Donbasa zakidali vas palkami");
         }
-        if (healthPoint == 0)
-            System.out.println("Deti Donbasa zakidali vas palkami");
     }
 
     public static byte checkChar(char usInp, char[] chArr){
